@@ -1,5 +1,6 @@
 package projeto.training_location.model;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -8,7 +9,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class TrainingLocation {
@@ -33,7 +34,7 @@ public class TrainingLocation {
     private List<String> photos;
 
     @Column(precision = 3, scale = 2)
-    private Double evaluation_average;
+    private BigDecimal evaluation_average;
 
     @Column()
     private String responsible;
@@ -41,10 +42,10 @@ public class TrainingLocation {
     @Column(nullable = false)
     private String price;
 
-    @ManyToMany
+    @OneToMany
     private List<Assenssment> assessments;
 
-    @ManyToMany
+    @OneToMany
     private List<DayActivity> days_activities;
 
 
@@ -84,13 +85,13 @@ public class TrainingLocation {
     public void setPhotos(List<String> photos) {
         this.photos = photos;
     }
-    public Double getEvaluation_average() {
+    public BigDecimal getEvaluation_average() {
         return evaluation_average;
     }
     public void setEvaluation_average() {
         Double list = this.assessments.stream().mapToDouble(Assenssment::getScore).average().orElse(0.0);
-        
-        this.evaluation_average = list;
+        BigDecimal num = BigDecimal.valueOf(list);
+        this.evaluation_average = num;
     }
     public String getResponsible() {
         return responsible;
