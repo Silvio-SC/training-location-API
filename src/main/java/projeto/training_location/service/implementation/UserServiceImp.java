@@ -1,5 +1,6 @@
 package projeto.training_location.service.implementation;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -17,6 +18,11 @@ public class UserServiceImp implements UserService{
 
     public UserServiceImp(UserRepository userRepository) {
         this.userRepository = userRepository;
+    }
+
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 
     @Override
@@ -48,6 +54,11 @@ public class UserServiceImp implements UserService{
         var foundedUser = this.findById(id);
         userRepository.delete(foundedUser);
 
+    }
+
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
 }

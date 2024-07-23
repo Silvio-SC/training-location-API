@@ -8,4 +8,5 @@ import projeto.training_location.model.User;
 
 public interface UserRepository extends JpaRepository<User, UUID> {
 
+    User findByEmail(String email);
 }
