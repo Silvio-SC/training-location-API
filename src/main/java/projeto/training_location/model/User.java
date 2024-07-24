@@ -39,13 +39,15 @@ public class User implements UserDetails {
     @OneToMany
     private List<Assenssment> assenssments;
 
+    public User() {
+    }
+
     public User(String name, String email, String password, UserRole role) {
         this.name =name;
         this.password = password;
         this.email = email;
         this.role = role;
     }
-
 
     public UUID getId() {
         return id;

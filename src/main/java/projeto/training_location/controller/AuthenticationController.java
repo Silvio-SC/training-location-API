@@ -2,6 +2,7 @@ package projeto.training_location.controller;
 
 import java.net.URI;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,36 +14,37 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import projeto.training_location.controller.dto.AuthenticationDTO;
+import projeto.training_location.controller.dto.LoginResponseDTO;
+import projeto.training_location.controller.dto.RegisterDTO;
 import projeto.training_location.model.User;
 import projeto.training_location.model.UserRole;
-import projeto.training_location.model.DTO.AuthenticationDTO;
-import projeto.training_location.model.DTO.LoginResponseDTO;
-import projeto.training_location.model.DTO.RegisterDTO;
 import projeto.training_location.repository.UserRepository;
 import projeto.training_location.security.TokenService;
 
 @RestController
-@RequestMapping("auth")
+@RequestMapping("/auth")
 public class AuthenticationController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+    
+    @Autowired
+    private TokenService tokenService;
 
     @Autowired
     private UserRepository userRepository;
    
-    @Autowired
-    private TokenService tokenService;
 
 
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody AuthenticationDTO data) {
 
-        var userPassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
+        var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
+        
+        Authentication auth = authenticationManager.authenticate(usernamePassword);
 
-        var auth = this.authenticationManager.authenticate(userPassword);
-
-        var token = tokenService.generateToken((User )auth.getPrincipal());
+        var token = tokenService.generateToken((User) auth.getPrincipal());
 
 
         return ResponseEntity.ok(new LoginResponseDTO(token));
@@ -88,5 +90,4 @@ public class AuthenticationController {
 
         return ResponseEntity.created(location).body(user); 
     }
-
 }

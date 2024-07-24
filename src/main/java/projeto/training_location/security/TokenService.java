@@ -24,9 +24,9 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             String token = JWT.create()
-                .withIssuer("auth-api")
+                .withIssuer("auth0")
                 .withSubject(user.getEmail())
-                .withExpiresAt(genExpirationDate())
+                .withExpiresAt((genExpirationDate()))
                 .sign(algorithm);
 
                 return token;
@@ -39,7 +39,7 @@ public class TokenService {
         try {
             Algorithm algorithm = Algorithm.HMAC256(secret);
             return JWT.require(algorithm)
-                .withIssuer("auth-api")
+                .withIssuer("auth0")
                 .build()
                 .verify(token)
                 .getSubject();
@@ -50,7 +50,7 @@ public class TokenService {
     }
 
     private Instant genExpirationDate(){
-        return LocalDateTime.now().plusHours(6).toInstant(ZoneOffset.of("-03:00"));
+        return LocalDateTime.now().plusHours(4).toInstant(ZoneOffset.of("-03:00"));
     }
     
 }
