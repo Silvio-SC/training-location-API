@@ -67,10 +67,10 @@ public class TrainingLocation {
     public void setName(String name) {
         this.name = name;
     }
-    public List<String> getFight_tag() {
+    public List<String> getFight_tags() {
         return fight_tags;
     }
-    public void setFight_tag(List<String> fight_tags) {
+    public void setFight_tags(List<String> fight_tags) {
         this.fight_tags = fight_tags;
     }
     public String getDescription() {
@@ -108,7 +108,7 @@ public class TrainingLocation {
 
 
     public enum fight_tags {
-        LUTA
+        Boxing, Muay_Thai, Jiu_Jitsu
     }
 
 }

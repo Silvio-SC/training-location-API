@@ -55,7 +55,7 @@ public class AuthenticationController {
     public ResponseEntity<User> register(@RequestBody RegisterDTO userToCreate) {
         if (this.userRepository.findByEmail(userToCreate.email()) != null) {
             return ResponseEntity.badRequest().build();
-        }
+        } 
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(userToCreate.password());
 

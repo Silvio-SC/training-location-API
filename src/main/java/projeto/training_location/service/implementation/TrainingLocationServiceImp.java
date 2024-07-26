@@ -1,0 +1,62 @@
+package projeto.training_location.service.implementation;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+
+import org.hibernate.ObjectNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import projeto.training_location.model.TrainingLocation;
+import projeto.training_location.repository.TrainingLocationRepository;
+import projeto.training_location.service.TrainingLocationService;
+
+
+@Service
+public class TrainingLocationServiceImp implements TrainingLocationService {
+
+    @Autowired
+    TrainingLocationRepository trainingLocationRepository;
+
+    public TrainingLocationServiceImp(TrainingLocationRepository trainingLocationRepository) {
+        this.trainingLocationRepository = trainingLocationRepository;
+    }
+
+    @Override
+    public List<TrainingLocation> findAll() {
+        return trainingLocationRepository.findAll();
+    }
+
+    @Override
+    public TrainingLocation findById(UUID id) {
+
+        Optional<TrainingLocation> foundedTrainingLocation = trainingLocationRepository.findById(id);
+
+        if (!foundedTrainingLocation.isPresent()) {
+            throw new ObjectNotFoundException("Training Location not found", foundedTrainingLocation);
+        }
+
+        return foundedTrainingLocation.get();
+    }
+
+    @Override
+    public TrainingLocation create(TrainingLocation tlToCreate) {
+        TrainingLocation createdTL = trainingLocationRepository.save(tlToCreate);
+        return createdTL;
+    }
+
+    @Override
+    public TrainingLocation update(UUID id, TrainingLocation trainingLocationToUpdate) {
+        var trainingLocation = this.findById(id);
+
+        var tl = trainingLocationRepository.save(trainingLocationToUpdate);
+        return tl;
+    }
+
+    @Override
+    public void delete(UUID id) {
+        trainingLocationRepository.deleteById(id);
+    }
+    
+}
