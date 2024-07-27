@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import projeto.training_location.service.exception.NotFoundException;
 import projeto.training_location.model.TrainingLocation;
 import projeto.training_location.repository.TrainingLocationRepository;
 import projeto.training_location.service.TrainingLocationService;
@@ -34,7 +34,7 @@ public class TrainingLocationServiceImp implements TrainingLocationService {
         Optional<TrainingLocation> foundedTrainingLocation = trainingLocationRepository.findById(id);
 
         if (!foundedTrainingLocation.isPresent()) {
-            throw new ObjectNotFoundException("Training Location not found", foundedTrainingLocation);
+            throw new NotFoundException("Training location not found");
         }
 
         return foundedTrainingLocation.get();
@@ -48,10 +48,10 @@ public class TrainingLocationServiceImp implements TrainingLocationService {
 
     @Override
     public TrainingLocation update(UUID id, TrainingLocation trainingLocationToUpdate) {
-        var trainingLocation = this.findById(id);
+            this.findById(id);
 
-        var tl = trainingLocationRepository.save(trainingLocationToUpdate);
-        return tl;
+            var tl = trainingLocationRepository.save(trainingLocationToUpdate);
+            return tl;
     }
 
     @Override

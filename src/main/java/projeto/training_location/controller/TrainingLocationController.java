@@ -3,9 +3,8 @@ package projeto.training_location.controller;
 import java.util.List;
 import java.util.UUID;
 
-import org.springframework.beans.BeanUtils;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,7 +35,7 @@ public class TrainingLocationController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<TrainingLocation> findById(@PathVariable UUID id){
+    public ResponseEntity<TrainingLocation> findById(@PathVariable UUID id) throws NotFoundException {
         var location = trainingLocationService.findById(id);
         return ResponseEntity.ok(location); 
     }
@@ -53,7 +52,7 @@ public class TrainingLocationController {
     public ResponseEntity<TrainingLocation> update(
         @PathVariable UUID id,
         @RequestBody TrainingLocation trainingLocationToUpdate
-    ){
+    ) throws NotFoundException{
 
         var location = trainingLocationService.findById(id);
 

@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.stereotype.Service;
 
 import projeto.training_location.model.User;
 import projeto.training_location.repository.UserRepository;
 import projeto.training_location.service.UserService;
+import projeto.training_location.service.exception.NotFoundException;
 
 @Service
 public class UserServiceImp implements UserService{
@@ -30,7 +30,7 @@ public class UserServiceImp implements UserService{
         Optional<User> foundedUser = userRepository.findById(id);
 
         if (!foundedUser.isPresent()) {
-            throw new ObjectNotFoundException("User not found", foundedUser);
+            throw new NotFoundException("User not found");
         }
         return foundedUser.get();
     }

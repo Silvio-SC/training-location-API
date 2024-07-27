@@ -9,7 +9,7 @@ public interface TrainingLocationService {
     
     List<TrainingLocation> findAll();
     
-    TrainingLocation findById(UUID id);
+    TrainingLocation findById(UUID id) ;
 
     TrainingLocation create(TrainingLocation trainingLocationToCreate);
 

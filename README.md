@@ -42,3 +42,7 @@ classDiagram
     DayActivity "1" --> "many" Activity
     TrainingLocation "1" --> "many" Assessment
 ```
+
+
+
+Cloudinary para upload de imagens.
