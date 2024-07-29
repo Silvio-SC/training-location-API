@@ -1,1 +1,1 @@
-web: java -war build/libs/training_location-0.0.1-SNAPSHOT.war
+web: java -jar build/libs/training_location-0.0.1-SNAPSHOT.jar

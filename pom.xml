@@ -11,7 +11,7 @@
 	<groupId>projeto</groupId>
 	<artifactId>training_location</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<!-- <packaging>war</packaging> -->
 	<name>training_location</name>
 	<description>Demo project for training location</description>
 	<url/>
