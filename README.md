@@ -46,3 +46,12 @@ classDiagram
 
 
 Cloudinary para upload de imagens.
+
+
+BD_HOST=postgres.railway.internal
+BD_PORT=5432
+DB_NAME=railway
+DB_USER=postgres
+DB_PASSWORD=HAyUmdOHDORJOKCFHvdwOBVyEDKhFIdz
+TOKEN_SECRET=banana
+
