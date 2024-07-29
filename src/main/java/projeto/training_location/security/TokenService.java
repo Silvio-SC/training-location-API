@@ -17,7 +17,7 @@ import projeto.training_location.model.User;
 @Service
 public class TokenService {
 
-    @Value("${api.security.token.secret}")
+    @Value("banana")
     private String secret;
 
     public String generateToken(User user){
