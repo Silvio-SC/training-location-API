@@ -5,6 +5,8 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import projeto.training_location.service.exception.NotFoundException;
@@ -24,8 +26,8 @@ public class TrainingLocationServiceImp implements TrainingLocationService {
     }
 
     @Override
-    public List<TrainingLocation> findAll() {
-        return trainingLocationRepository.findAll();
+    public Page<TrainingLocation> findAll(Pageable pageable) {
+        return trainingLocationRepository.findAll(pageable);
     }
 
     @Override

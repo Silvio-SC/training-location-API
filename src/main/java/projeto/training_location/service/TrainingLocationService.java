@@ -3,13 +3,16 @@ package projeto.training_location.service;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+
 import projeto.training_location.model.TrainingLocation;
 
 public interface TrainingLocationService {
     
-    List<TrainingLocation> findAll();
+    Page<TrainingLocation> findAll(Pageable pageable);
     
-    TrainingLocation findById(UUID id) ;
+    TrainingLocation findById(UUID id);
 
     TrainingLocation create(TrainingLocation trainingLocationToCreate);
 

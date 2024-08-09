@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.transaction.Transactional;
 import projeto.training_location.helper.MyBeanUtils;
 import projeto.training_location.model.TrainingLocation;
 import projeto.training_location.service.TrainingLocationService;
@@ -27,12 +30,21 @@ public class TrainingLocationController {
     private TrainingLocationService trainingLocationService;
 
     @GetMapping()
-    public ResponseEntity<List<TrainingLocation>> findAll(){
+    public ResponseEntity<Page<TrainingLocation>> findAll(Pageable pageable) {
 
-        var locations = trainingLocationService.findAll();
+        var locations = trainingLocationService.findAll(pageable);
 
         return ResponseEntity.ok(locations);
     }
+
+    // @GetMapping()
+    // public ResponseEntity<Page<TrainingLocation>> findAll(
+    //    @PageableDefault(size = 2, sort = {"name"})Pageable pageable) {
+    //
+    //     var locations = trainingLocationService.findAll(pageable);
+    //
+    //     return ResponseEntity.ok(locations);
+    // }
 
     @GetMapping("/{id}")
     public ResponseEntity<TrainingLocation> findById(@PathVariable UUID id) throws NotFoundException {
@@ -41,6 +53,7 @@ public class TrainingLocationController {
     }
 
     @PostMapping()
+    @Transactional
     public ResponseEntity<TrainingLocation> create(
         @RequestBody TrainingLocation tlToCreate){
             var tl = trainingLocationService.create(tlToCreate);
@@ -49,6 +62,7 @@ public class TrainingLocationController {
     }
 
     @PatchMapping("/{id}")
+    @Transactional
     public ResponseEntity<TrainingLocation> update(
         @PathVariable UUID id,
         @RequestBody TrainingLocation trainingLocationToUpdate
@@ -63,6 +77,7 @@ public class TrainingLocationController {
     }
 
     @DeleteMapping("/{id}")
+    @Transactional
     public ResponseEntity<Void> delete(@PathVariable UUID id) {
         trainingLocationService.delete(id);
         return ResponseEntity.noContent().build();

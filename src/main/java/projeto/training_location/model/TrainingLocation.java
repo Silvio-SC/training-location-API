@@ -108,7 +108,7 @@ public class TrainingLocation {
 
 
     public enum fight_tags {
-        Boxing, Muay_Thai, Jiu_Jitsu
+        Boxing, Muay_Thai, Jiu_Jitsu, MMA, Karate, Judo, Taekwondo, Kung_Fu
     }
 
 }
