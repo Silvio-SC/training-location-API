@@ -9,8 +9,16 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class DayActivity {
 
     @Id
@@ -28,31 +36,6 @@ public class DayActivity {
     private TrainingLocation trainingLocation;
 
     
-
-    public Day getDay() {
-        return day;
-    }
-
-
-
-    public void setDay(Day day) {
-        this.day = day;
-    }
-
-
-
-    public List<Activity> getActivities() {
-        return activities;
-    }
-
-
-
-    public void setActivities(List<Activity> activities) {
-        this.activities = activities;
-    }
-
-
-
     public enum Day {
         MONDAY,
         TUESDAY,

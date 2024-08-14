@@ -1,4 +1,4 @@
-package projeto.training_location.security;
+package projeto.training_location.infra.security;
 
 import java.io.IOException;
 
@@ -12,6 +12,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import projeto.training_location.infra.TokenService;
 import projeto.training_location.model.User;
 import projeto.training_location.repository.UserRepository;
 

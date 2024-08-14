@@ -15,15 +15,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
-import projeto.training_location.controller.dto.AuthenticationDTO;
-import projeto.training_location.controller.dto.LoginResponseDTO;
-import projeto.training_location.controller.dto.RegisterDTO;
+import projeto.training_location.infra.TokenService;
 import projeto.training_location.model.User;
 import projeto.training_location.model.UserRole;
+import projeto.training_location.model.dto.AuthenticationDTO;
+import projeto.training_location.model.dto.LoginResponseDTO;
+import projeto.training_location.model.dto.RegisterDTO;
 import projeto.training_location.repository.UserRepository;
-import projeto.training_location.security.TokenService;
 
 @CrossOrigin
 @RestController
@@ -79,6 +80,7 @@ public class AuthenticationController {
 
     @PostMapping("/register/admin")
     @Transactional
+    @SecurityRequirement(name = "bearer-key")
     public ResponseEntity<User> registerAdmin(@RequestBody @Valid RegisterDTO userToCreate) {
         if (this.userRepository.findByEmail(userToCreate.email()) != null) {
             return ResponseEntity.badRequest().build();

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import projeto.training_location.model.User;
 import projeto.training_location.repository.UserRepository;
 import projeto.training_location.service.UserService;
-import projeto.training_location.service.exception.NotFoundException;
 
 @Service
 public class UserServiceImp implements UserService{
@@ -29,9 +28,6 @@ public class UserServiceImp implements UserService{
     public User findById(UUID id) {
         Optional<User> foundedUser = userRepository.findById(id);
 
-        if (!foundedUser.isPresent()) {
-            throw new NotFoundException("User not found");
-        }
         return foundedUser.get();
     }
 

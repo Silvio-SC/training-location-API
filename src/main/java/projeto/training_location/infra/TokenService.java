@@ -1,4 +1,4 @@
-package projeto.training_location.security;
+package projeto.training_location.infra;
 
 import java.time.Instant;
 import java.time.LocalDateTime;

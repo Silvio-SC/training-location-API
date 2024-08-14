@@ -1,6 +1,5 @@
 package projeto.training_location.controller;
 
-import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,13 +16,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.transaction.Transactional;
-import projeto.training_location.helper.MyBeanUtils;
+import projeto.training_location.infra.helper.MyBeanUtils;
 import projeto.training_location.model.TrainingLocation;
 import projeto.training_location.service.TrainingLocationService;
 
 @RestController
 @RequestMapping("/training-location")
+@SecurityRequirement(name = "bearer-key")
 public class TrainingLocationController {
     
     @Autowired

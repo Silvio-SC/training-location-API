@@ -5,13 +5,26 @@ import java.util.List;
 import java.util.UUID;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 @Entity
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(of = "id")
 public class TrainingLocation {
 
     @Id
@@ -19,12 +32,15 @@ public class TrainingLocation {
     private UUID id;
 
     @Column(nullable = false)
-    private String location;
+    @Embedded
+    private Address address;
 
     @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
+    @ElementCollection(targetClass = fight_tags.class)
+    @Enumerated(EnumType.STRING)
     private List<String> fight_tags;
 
     @Column(nullable = false)
@@ -47,64 +63,6 @@ public class TrainingLocation {
 
     @OneToMany
     private List<DayActivity> days_activities;
-
-
-    public UUID getId() {
-        return id;
-    }
-    public void setId(UUID id) {
-        this.id = id;
-    }
-    public String getLocation() {
-        return location;
-    }
-    public void setLocation(String location) {
-        this.location = location;
-    }
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-    public List<String> getFight_tags() {
-        return fight_tags;
-    }
-    public void setFight_tags(List<String> fight_tags) {
-        this.fight_tags = fight_tags;
-    }
-    public String getDescription() {
-        return description;
-    }
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    public List<String> getPhotos() {
-        return photos;
-    }
-    public void setPhotos(List<String> photos) {
-        this.photos = photos;
-    }
-    public BigDecimal getEvaluation_average() {
-        return evaluation_average;
-    }
-    public void setEvaluation_average() {
-        Double list = this.assessments.stream().mapToDouble(Assenssment::getScore).average().orElse(0.0);
-        BigDecimal num = BigDecimal.valueOf(list);
-        this.evaluation_average = num;
-    }
-    public String getResponsible() {
-        return responsible;
-    }
-    public void setResponsible(String responsible) {
-        this.responsible = responsible;
-    }
-    public String getPrice() {
-        return price;
-    }
-    public void setPrice(String price) {
-        this.price = price;
-    }
 
 
     public enum fight_tags {

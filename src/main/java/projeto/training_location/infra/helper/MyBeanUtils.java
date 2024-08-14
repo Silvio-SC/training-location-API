@@ -1,4 +1,4 @@
-package projeto.training_location.helper;
+package projeto.training_location.infra.helper;
 
 import org.springframework.beans.BeanUtils;
 import java.beans.PropertyDescriptor;

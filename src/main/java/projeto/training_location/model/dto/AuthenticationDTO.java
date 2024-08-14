@@ -1,4 +1,4 @@
-package projeto.training_location.controller.dto;
+package projeto.training_location.model.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

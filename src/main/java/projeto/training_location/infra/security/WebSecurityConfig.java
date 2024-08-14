@@ -1,4 +1,4 @@
-package projeto.training_location.security;
+package projeto.training_location.infra.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -31,6 +31,9 @@ public class WebSecurityConfig {
                 .requestMatchers(HttpMethod.GET, "/users").permitAll()
                 .requestMatchers(HttpMethod.POST, "/auth/login").permitAll()
                 .requestMatchers(HttpMethod.POST, "/auth/register").permitAll()
+                .requestMatchers( "/swagger-ui.html").permitAll()
+                .requestMatchers( "/swagger-ui/**").permitAll()
+                .requestMatchers( "/v3/api-docs/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/auth/registerAdmin").hasRole("ADMIN")
                 .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)

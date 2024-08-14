@@ -1,4 +1,4 @@
-package projeto.training_location.controller.exception;
+package projeto.training_location.infra;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,8 +21,8 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(NotFoundException.class)
-    public ResponseEntity<String> handleNotFoundException(Exception e) {
-        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+    public ResponseEntity NotFoundException(Exception e) {
+        return ResponseEntity.notFound().build();
     }
 
 

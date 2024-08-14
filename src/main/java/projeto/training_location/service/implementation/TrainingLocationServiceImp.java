@@ -1,7 +1,5 @@
 package projeto.training_location.service.implementation;
 
-import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,13 +30,10 @@ public class TrainingLocationServiceImp implements TrainingLocationService {
 
     @Override
     public TrainingLocation findById(UUID id) {
-
-        Optional<TrainingLocation> foundedTrainingLocation = trainingLocationRepository.findById(id);
-
+        var foundedTrainingLocation = trainingLocationRepository.findById(id);
         if (!foundedTrainingLocation.isPresent()) {
             throw new NotFoundException("Training location not found");
         }
-
         return foundedTrainingLocation.get();
     }
 
